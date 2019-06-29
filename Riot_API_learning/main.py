@@ -1,15 +1,17 @@
 from RiotAPI import RiotAPI
 
+
 def main():
-	api = RiotAPI('RGAPI-33bd1a06-93f4-4855-82f1-2957bd02169e')
-	id = api.get_summoner_by_name(input())['id']
-	print(id)
-	response = api.get_masteries_by_summoner_id(id)
-	for i in response:
-		print(i, '\n\n')
-	
+    api = RiotAPI("RGAPI-5584e320-d031-45ed-8e81-960fc913b3c9")
+    # id = api.get_summoner_by_name(input())["id"]
+    # print(id)
+    # response = api.get_masteries_by_summoner_id(id)
+    api.challengerleagues_Solo_5x5(0)
 
-	
 
-if __name__ == '__main__':
-	main()
+# for i in response:
+#     print(i, "\n\n")
+
+
+if __name__ == "__main__":
+    main()
