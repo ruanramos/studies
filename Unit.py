@@ -14,3 +14,6 @@ class Unit:
 
     def level_up(self):
         self.tier = self.tier + 1
+
+    def __str__(self):
+        return "Name: {}\nTier: {}\n".format(self.name, self.tier)
