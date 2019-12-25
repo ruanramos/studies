@@ -2,6 +2,7 @@ import JsonReader
 import RiotConsts
 from RiotAPI import RiotAPI
 from Unit import Unit
+from collections import defaultdict
 
 
 def main():
@@ -29,11 +30,11 @@ def main():
         print(u)
 
 def get_my_team():
-    my_team = {}
+    my_team = defaultdict(list)
     inp = input("Champion tier: ")
     while len(inp) > 2:
         champ, tier = inp.split()
-        my_team[champ] = tier
+        my_team[champ].append(int(tier))
         inp = input("Champion tier: ")
     return my_team
 
