@@ -1,16 +1,21 @@
 from RiotAPI import RiotAPI
+import JsonReader
+import os
 
 
 def main():
-    api = RiotAPI("RGAPI-5584e320-d031-45ed-8e81-960fc913b3c9")
-    # id = api.get_summoner_by_name(input())["id"]
-    # print(id)
-    # response = api.get_masteries_by_summoner_id(id)
-    api.challengerleagues_Solo_5x5(0)
+    api = RiotAPI(os.environ.get("RIOT_API_KEY"))
+    # summoner_id = api.get_masteries_by_summoner_id(api.get_summoner_by_name(input())["id"])
+    # summoner = api.get_tft_summoner_by_name("moreninha52")
+    last_20_matches = api.get_tft_match_by_player_puuid(api.get_tft_summoner_by_name("moreninha52")["puuid"], 20)
+    response = api.get_tft_match_by_match_id("BR1_1821009083")
+    #print(response)
+    #print(last_20_matches)
 
+    #print(response["metadata"])
+    #print(response["info"])
 
-# for i in response:
-#     print(i, "\n\n")
+    #print(JsonReader.read_tft_champions_static_data())
 
 
 if __name__ == "__main__":
