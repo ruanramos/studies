@@ -35,3 +35,8 @@ def read_tft_hexes_static_data():
         for hexes in hexes_data:
             hexes.append(hexes)
     return hexes
+
+
+def write_json(data, json_file):
+    with open(json_file, 'w') as outfile:
+        outfile.write(json.dumps(data, indent=4))
