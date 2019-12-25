@@ -1,3 +1,7 @@
+from collections import defaultdict
+
+import JsonReader
+
 URL = {
     "base": "https://{}.api.riotgames.com{}",
     "summoner_by_name": "/lol/summoner/v{}/summoners/by-name/{}",
@@ -25,3 +29,21 @@ API_VERSIONS = {
 QUEUES = ["RANKED_SOLO_5x5", "RANKED_FLEX_SR", "RANKED_FLEX_TT"]
 
 REGIONS = {"brasil": "br1", "americas": "americas"}
+
+def init_constants():
+    cost_champions = defaultdict(lambda: set())
+    trait_champions = defaultdict(lambda: set())
+    all_champions = JsonReader.read_tft_champions_static_data()
+    all_traits = JsonReader.read_tft_traits_static_data()
+
+    for trait in all_traits:
+        trait_champions[trait["name"]] = set()
+
+    for champ in all_champions:
+        cost_champions[champ["cost"]].add(champ["champion"])
+        for trait in champ["traits"]:
+            trait_champions[trait].add(champ["champion"])
+
+    return trait_champions, cost_champions
+
+TRAIT_CHAMPIONS, COST_CHAMPIONS = init_constants()

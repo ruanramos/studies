@@ -2,6 +2,8 @@ from collections import defaultdict
 
 import JsonReader
 from RiotAPI import RiotAPI
+import RiotConsts
+from Unit import Unit
 
 
 def main():
@@ -16,21 +18,15 @@ def main():
     response = api.get_tft_match_by_match_id("BR1_1821009083")
     JsonReader.write_json(response, "a.json")
 
-    cost_champions = defaultdict(lambda: set())
-    trait_champions = defaultdict(lambda: set())
-    all_champions = JsonReader.read_tft_champions_static_data()
-    all_traits = JsonReader.read_tft_traits_static_data()
 
-    for trait in all_traits:
-        trait_champions[trait["name"]] = set()
+    print(RiotConsts.TRAIT_CHAMPIONS)
+    print(RiotConsts.COST_CHAMPIONS)
 
-    for champ in all_champions:
-        cost_champions[champ["cost"]].add(champ["champion"])
-        for trait in champ["traits"]:
-            trait_champions[trait].add(champ["champion"])
-
-    print(trait_champions)
-    print(cost_champions)
+    u = Unit("zed", 3)
+    print(u.name)
+    print(u.items)
+    print(u.character_id)
+    print(u.tier)
 
 
 #def get_my_team():
