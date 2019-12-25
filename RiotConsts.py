@@ -30,11 +30,14 @@ QUEUES = ["RANKED_SOLO_5x5", "RANKED_FLEX_SR", "RANKED_FLEX_TT"]
 
 REGIONS = {"brasil": "br1", "americas": "americas"}
 
+
 def init_constants():
     cost_champions = defaultdict(lambda: set())
     trait_champions = defaultdict(lambda: set())
+    item_itemid = defaultdict(lambda: -1)
     all_champions = JsonReader.read_tft_champions_static_data()
     all_traits = JsonReader.read_tft_traits_static_data()
+    all_items = JsonReader.read_tft_items_static_data()
 
     for trait in all_traits:
         trait_champions[trait["name"]] = set()
@@ -44,6 +47,11 @@ def init_constants():
         for trait in champ["traits"]:
             trait_champions[trait].add(champ["champion"])
 
-    return trait_champions, cost_champions
+    for item in all_items:
+        item_itemid[item["name"]] = item["id"]
 
-TRAIT_CHAMPIONS, COST_CHAMPIONS = init_constants()
+    return trait_champions, cost_champions, item_itemid
+
+
+# noinspection SpellCheckingInspection
+TRAIT_CHAMPIONS, COST_CHAMPIONS, ITEMNAME_ITEMID = init_constants()
