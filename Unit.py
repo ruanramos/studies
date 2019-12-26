@@ -15,5 +15,12 @@ class Unit:
     def level_up(self):
         self.tier = self.tier + 1
 
+    def get_unit_traits(self):
+        traits = []
+        for trait, champions in RiotConsts.TRAIT_CHAMPIONS.items():
+            if self.name in champions:
+                traits.append(trait)
+        return traits
+
     def __str__(self):
         return "Name: {}\nTier: {}\n".format(self.name, self.tier)
