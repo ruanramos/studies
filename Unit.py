@@ -2,7 +2,8 @@ import RiotConsts
 
 class Unit:
 
-    def __init__(self, character_name, tier, items_id=[]):
+    def __init__(self, character_name, tier, active=False, items_id=[]):
+        self.active = active
         self.character_id = "TFT2_" + character_name.title()
         self.name = character_name.title()
         self.items = items_id
@@ -14,6 +15,12 @@ class Unit:
 
     def level_up(self):
         self.tier = self.tier + 1
+
+    def play_unit(self):
+        self.active = True
+
+    def remove_unit(self):
+        self.active = False
 
     def get_unit_traits(self):
         traits = []
