@@ -4,6 +4,7 @@ import JsonReader
 import RiotConsts
 from RiotAPI import RiotAPI
 from Unit import Unit
+from Team import Team
 
 
 def main():
@@ -22,13 +23,16 @@ def main():
     #print(RiotConsts.TRAIT_CHAMPIONS)
     #print(RiotConsts.COST_CHAMPIONS)
 
-    my_team = get_my_team()
+    owned_units_and_tiers = get_my_team()
     my_units = []
-    for champ, tier in my_team.items():
-        my_units.append(Unit(champ, tier))
+    for champ, tier in owned_units_and_tiers.items():
+        my_units.append(Unit(champ, tier, True)) # adding units all as active
 
     #print(my_units[3].getUnitTraits())
 
+    my_team = Team(my_units)
+    print(my_team.get_active_team_traits())
+    print(my_team.get_inactive_team_traits())
 
 def get_my_team():
     my_team = defaultdict(list)
