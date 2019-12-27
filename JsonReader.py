@@ -6,6 +6,7 @@ def read_tft_champions_static_data():
     with open("champions.json") as f:
         champions_data = json.load(f)
         for champion in champions_data:
+            champion["champion"] = champion["champion"].casefold()
             champions.append(champion)
     return champions
 
