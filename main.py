@@ -33,6 +33,7 @@ def main():
     my_team = Team(my_units)
     print(my_team.get_active_team_traits())
     print(my_team.get_inactive_team_traits())
+    print(RiotConsts.TRAIT_SETS)
 
 def get_my_team():
     my_team = defaultdict(list)

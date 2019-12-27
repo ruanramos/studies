@@ -35,12 +35,19 @@ def init_constants():
     cost_champions = defaultdict(lambda: set())
     trait_champions = defaultdict(lambda: set())
     item_itemid = defaultdict(lambda: -1)
+    trait_sets = defaultdict(lambda: [])
+
     all_champions = JsonReader.read_tft_champions_static_data()
     all_traits = JsonReader.read_tft_traits_static_data()
     all_items = JsonReader.read_tft_items_static_data()
 
     for trait in all_traits:
         trait_champions[trait["name"]] = set()
+        try:
+            trait_sets[trait["name"]] = trait["sets"]
+        except KeyError:
+            pass
+
 
     for champ in all_champions:
         cost_champions[champ["cost"]].add(champ["champion"])
@@ -50,8 +57,8 @@ def init_constants():
     for item in all_items:
         item_itemid[item["name"]] = item["id"]
 
-    return trait_champions, cost_champions, item_itemid
+    return trait_champions, cost_champions, item_itemid, trait_sets
 
 
 # noinspection SpellCheckingInspection
-TRAIT_CHAMPIONS, COST_CHAMPIONS, ITEMNAME_ITEMID = init_constants()
+TRAIT_CHAMPIONS, COST_CHAMPIONS, ITEMNAME_ITEMID, TRAIT_SETS = init_constants()
