@@ -25,7 +25,7 @@ class Unit:
     def get_unit_traits(self):
         traits = []
         for trait, champions in RiotConsts.TRAIT_CHAMPIONS.items():
-            if self.name in champions:
+            if self.name.casefold() in champions:
                 traits.append(trait)
         return traits
 
