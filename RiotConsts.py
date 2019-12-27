@@ -48,7 +48,6 @@ def init_constants():
         except KeyError:
             pass
 
-
     for champ in all_champions:
         cost_champions[champ["cost"]].add(champ["champion"])
         for trait in champ["traits"]:
