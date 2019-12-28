@@ -7,6 +7,7 @@ from Team import Team
 from Unit import Unit
 
 
+
 def main():
     api = get_api_object()
 
@@ -14,13 +15,10 @@ def main():
     last_20_matches = api.get_tft_match_by_player_puuid(summoner_puuid, 20)
 
     response = api.get_tft_match_by_match_id("BR1_1821009083")
-    # print(response)
     JsonReader.write_json(response, "a.json")
 
-    # print(RiotConsts.TRAIT_CHAMPIONS)
-    # print(RiotConsts.COST_CHAMPIONS)
-
     owned_units_and_tiers = get_my_team()
+    level = get_my_level()
 
     my_active_units = []
     my_stored_units = []
@@ -29,14 +27,15 @@ def main():
     for champ, tier in owned_units_and_tiers[1].items():
         my_stored_units.append(Unit(champ, tier, False))
 
-    # print(my_units[3].getUnitTraits())
-
-    my_team = Team(my_active_units, my_stored_units)
+    my_team = Team(my_active_units, my_stored_units, level)
 
     print(my_team.get_active_team_traits())
     print(my_team.get_inactive_team_traits())
     print(RiotConsts.TRAIT_SETS)
+    print(my_team.all_units)
 
+    for i in my_team.a():
+        print(i)
 
 def get_api_object():
     key = ""
@@ -45,6 +44,8 @@ def get_api_object():
     api = RiotAPI(key)
     return api
 
+def get_my_level():
+    return int(input("Your level: "))
 
 def get_my_team():
     my_active_team = defaultdict(list)
