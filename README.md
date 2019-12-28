@@ -1,2 +1,2 @@
-# Riot_API
-Playing around riot's api
+# Studies
+Just my studies repo
